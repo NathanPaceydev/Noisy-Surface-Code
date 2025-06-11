@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, physics}
+
+\begin{document}
+
+\subsection{Transformation to the interaction picture}
+
+We verify that the transformation
+\[
+\ket{\phi_s} := U_s^\dagger \ket{\psi_s}, \quad \text{with} \quad U_s = \exp\left(- \frac{i}{\hbar} H_s  \right), \quad U_s^\dagger = \exp\left( \frac{i}{\hbar} H_s  \right),
+\]
+correctly removes the deterministic Hamiltonian evolution from the stochastic Schrödinger equation and yields the interaction-picture stochastic dynamics.
+
+\vspace{1em}
+\noindent
+The evolution of the Schrödinger-picture state \( \ket{\psi_s} \) is given by:
+\begin{equation}
+d \ket{\psi_s} = \left[ -\frac{i}{\hbar} H_s \, ds +  \sum_k \left[i \epsilon L_k \, dW_{k,s} - \frac{\epsilon^2}{2} L_k^\dagger L_k  \, ds\right] \right]\ket{\psi_s} ,
+\label{eq:schrodinger_sde}
+\end{equation}
+where \( H_s \) is the (possibly time-dependent) system Hamiltonian, and the \( L_k \) are noise operators.
+
+To derive the corresponding evolution for the interaction-picture state \( \ket{\phi_s} = U_s^\dagger \ket{\psi_s} \), we use the product rule:
+\[
+d \ket{\phi_s} = d(U_s^\dagger \ket{\psi_s}) = (dU_s^\dagger) \ket{\psi_s} + U_s^\dagger d \ket{\psi_s}.
+\]
+
+We now compute the derivative of \( U_s^\dagger \). Since \( U_s \) satisfies
+\[
+\frac{d}{ds} U_s =-\frac{i}{\hbar} H_s U_s,
+\]
+it follows that
+\[
+\frac{d}{ds} U_s^\dagger = \frac{i}{\hbar} U_s^\dagger H_s \quad \Rightarrow \quad dU_s^\dagger = \frac{i}{\hbar} U_s^\dagger H_s \, ds.
+\]
+
+Substituting into the expression for \( d\ket{\phi_s} \), we find:
+\begin{align}
+d \ket{\phi_s} 
+&= \frac{i}{\hbar} U_s^\dagger H_s \ket{\psi_s} \, ds + U_s^\dagger d \ket{\psi_s} \notag \\
+&= \frac{i}{\hbar} U_s^\dagger H_s \ket{\psi_s} \, ds 
++ U_s^\dagger \left[ -\frac{i}{\hbar} H_s \, ds + \sum_k \left[i \epsilon L_k \, dW_{k,s} - \frac{\epsilon^2}{2} L_k^\dagger L_k  \, ds\right] \right]\ket{\psi_s} \notag \\
+&= \frac{i}{\hbar} U_s^\dagger H_s \ket{\psi_s} \, ds 
+- \frac{i}{\hbar} U_s^\dagger H_s \ket{\psi_s} \, ds 
++  \sum_k \left[i \epsilon  \, dW_{k,s}U_s^\dagger L_k - \frac{\epsilon^2}{2} ds U_s^\dagger L_k^\dagger L_k  \, \right] \ket{\psi_s} .
+\end{align}
+Now observe that the two Hamiltonian terms cancel. 
+
+Now substitute \( \ket{\psi_s} = U_s \ket{\phi_s} \) to express everything in terms of \( \ket{\phi_s} \):
+\[
+U_s^\dagger L_k \ket{\psi_s} = U_s^\dagger L_k U_s \ket{\phi_s}, \quad \text{and} \quad U_s^\dagger L_k^\dagger L_k \ket{\psi_s} = (U_s^\dagger L_k^\dagger U_s)(U_s^\dagger L_k U_s) \ket{\phi_s}.
+\]
+
+Define the interaction-picture Lindblad operators:
+\[
+L_{k,s} := U_s^\dagger L_k U_s,
+\]
+then we obtain:
+\begin{equation}
+d \ket{\phi_s} = \left[ \sum_k i \epsilon \, dW_{k,s} \, L_{k,s} - \frac{\epsilon^2}{2} \, ds \, L_{k,s}^\dagger L_{k,s} \right] \ket{\phi_s}.
+\label{eq:interaction_picture_sde}
+\end{equation}
+
+This matches the expected form of the Itô equation for the interaction picture trajectory. Hence, the definition of \( U_s \) is consistent with the transformation \( \ket{\phi_s} = U_s^\dagger \ket{\psi_s} \) and correctly removes the deterministic Hamiltonian evolution from the stochastic dynamics.
+
+\end{document}
